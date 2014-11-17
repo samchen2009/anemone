@@ -55,7 +55,10 @@ module Anemone
       # proxy server port number
       :proxy_port => false,
       # HTTP read timeout in seconds
-      :read_timeout => nil
+      :read_timeout => nil,
+      # Use encoding type in HTML/XML header by default
+      :encoding => nil
+
     }
 
     # Create setter methods for all options to be called from the crawl block
@@ -147,7 +150,6 @@ module Anemone
     #
     def run
       process_options
-
       @urls.delete_if { |url| !visit_link?(url) }
       return if @urls.empty?
 

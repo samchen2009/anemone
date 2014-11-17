@@ -47,6 +47,7 @@ module Anemone
       @response_time = params[:response_time]
       @body = params[:body]
       @error = params[:error]
+      @encoding = params[:encoding]
 
       @fetched = !params[:code].nil?
     end
@@ -72,9 +73,9 @@ module Anemone
     #
     # Nokogiri document for the HTML body
     #
-    def doc
+    def doc(encoding = nil)
       return @doc if @doc
-      @doc = Nokogiri::HTML(@body) if @body && html? rescue nil
+      @doc = Nokogiri::HTML(@body, nil, encoding || @encoding) if @body && html? rescue nil
     end
 
     #
